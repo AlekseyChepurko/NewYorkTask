@@ -15,7 +15,7 @@ module.exports = function (options) {
     const rules = [
         ...config.rules,
         {
-            test: /\.s?css$/,
+            test: /\.css$/,
             exclude: /node_modules/,
             use: [
                 'style-loader',
