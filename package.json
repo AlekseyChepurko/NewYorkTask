@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
+    "dev": "rimraf ./build && webpack",
+    "dev-server": "webpack-dev-server",
 
     "lint": "eslint ./source",
     "lint-fix": "eslint ./source --fix"
