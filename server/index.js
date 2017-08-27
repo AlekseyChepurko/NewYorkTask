@@ -45,12 +45,14 @@ app.get("/api/articles/count", async (req, res) => {
     res.end();
 });
 
-
-
 app.get("/api/articles/list", async (req, res) => {
-    res.send(await db.getArticleList());
+    res.send(await db.getArticleList(req.query));
 });
 
+
+app.get('/api/article/:id', async (req, res) => {
+    res.send( await db.getArticleById(req.params.id));
+});
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../build", "index.html"));
