@@ -32,7 +32,7 @@ export default function Articles(state = initialState, action){
             };
         case CHANGE_PAGE: return {
             ...state,
-            currentPage: action.payload.pageNumber
+            currentPage: action.payload.pageNumber-1
         };
         default: return state;
     }
@@ -64,7 +64,13 @@ export const changePage = (payload) => ({
 });
 
 function* watchGetArticles(action){
-    const articles = yield fetch(`/api/articles/list`)
+    let params = "";
+    for(let parameter in action.payload){
+        if (action.payload[parameter] !== undefined){
+            params += `&${parameter}=${action.payload[parameter]}`;
+        }
+    }
+    const articles = yield fetch(`/api/articles/list/?${params}`)
         .then(r => r.json())
         .catch(e => {
             console.log(e);
