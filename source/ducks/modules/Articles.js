@@ -6,6 +6,7 @@ const GET_ARTICLES = `${appName}/Articles/GET_ARTICLES`;
 const ADD_ARTICLES = `${appName}/Articles/ADD_ARTICLES`;
 const LOAD_ARTICLES_COUNT = `${ appName }/Articles/LOAD_ARTICLES_COUNT`;
 const SET_ARTICLES_COUNT = `${ appName }/Articles/SET_ARTICLES_COUNT`;
+const CHANGE_PAGE = `${ appName }/Articles/CHANGE_PAGE`;
 
 const initialState = {
     articlesCount: 0,
@@ -29,6 +30,10 @@ export default function Articles(state = initialState, action){
                 ...state,
                 articlesCount: action.payload.articlesCount
             };
+        case CHANGE_PAGE: return {
+            ...state,
+            currentPage: action.payload.pageNumber
+        };
         default: return state;
     }
 }
@@ -50,6 +55,11 @@ const setArticlesCount = (payload) => ({
 
 export const loadArticlesCount = ( payload ) => ({
     type: LOAD_ARTICLES_COUNT,
+    payload
+});
+
+export const changePage = (payload) => ({
+    type: CHANGE_PAGE,
     payload
 });
 
