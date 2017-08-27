@@ -9,16 +9,14 @@ class Article  extends React.Component {
         this.props.loadArticle({id});
     }
     render() {
-        if (this.props.article )
-            return <div>something went wrong</div>;
         if (!this.props.article) {
             return <div>loading data...</div>;
         }
         const {
             headline,
             abstract
-        } = this.props;
-        const links = this.props.links.map(link =>
+        } = this.props.article;
+        const links = this.props.article.links.map(link =>
             <a key={link.link} href={link.link}>{link.text}</a>);
         return  <div>
             <h1>{headline}</h1>
@@ -29,23 +27,27 @@ class Article  extends React.Component {
 }
 
 Article.propTypes = {
-    headline: string,
-    links: arrayOf(shape({
-        link: string,
-        text: string
-    })),
-    abstract: string
+    article: shape({
+        headline: string,
+        links: arrayOf(shape({
+            link: string,
+            text: string
+        })),
+        abstract: string
+    })
 };
 
 Article.defaultProps = {
-    headline: "",
-    links: [
-        {
-            name: "",
-            link: "#"
-        }
-    ],
-    abstract: ""
+    article: {
+        headline: "",
+        links: [
+            {
+                name: "",
+                link: "#"
+            }
+        ],
+        abstract: ""
+    }
 
 };
 
