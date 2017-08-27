@@ -1,0 +1,23 @@
+.articles__result {
+    &-wrap{
+      max-width: 70%;
+      margin: auto;
+      margin-bottom: 10px;
+      padding: 10px;
+      background: rgba(0,0,0, .1);
+     }
+
+    &-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .headline {
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+     }
+}
