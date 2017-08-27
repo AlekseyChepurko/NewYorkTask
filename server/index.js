@@ -51,4 +51,9 @@ app.get("/api/articles/list", async (req, res) => {
     res.send(await db.getArticleList());
 });
 
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
 app.listen(PORT, () => console.info(`Listening on ${PORT} port`));
