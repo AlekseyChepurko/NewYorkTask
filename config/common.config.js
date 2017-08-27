@@ -23,6 +23,7 @@ module.exports = function (options) {
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
+            APP_NAME: JSON.stringify("NewYorkTask")
         }),
         new HtmlWebpackPlugin({
             template: path.join(sourcePath, 'index.html'),
