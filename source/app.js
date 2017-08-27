@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import initStore, { history } from './ducks/store';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import "./app.css";
 import SagasManager from './ducks/helpers/sagasManager';
 import { MainPage } from "./components/MainPage";
@@ -14,13 +15,13 @@ store.runSaga(SagasManager.getRootSaga());
 
 ReactDOM.render(
     <Provider store={ store }>
-        <Router history={history}>
+        <ConnectedRouter history={history}>
             <Switch>
                 <Route exact path="/" component={ MainPage }/>
                 <Route path="/article/:id" component={ Article }/>
                 <Route path="*" component={ NotFound }/>
             </Switch>
-        </Router>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );
