@@ -9,7 +9,9 @@ const ArticleSchema = new Schema({
     lead: {
         type: String,
         required: true },
-    links: [String],
+    links: [{name: String, link: String}],
+    tags: [String],
+    abstract: String,
     creationDate: {
         type: Date,
         min: Date('1851-09-18'),
