@@ -35,6 +35,8 @@ app.get('/health', (req, res) => {
 
 
 app.post("/api/articles/add", async (req, res) => {
+    await db.addArticle({});
+    res.end();
 });
 
 app.get("/api/articles/count", async (req, res) => {
