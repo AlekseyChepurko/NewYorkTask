@@ -9,6 +9,7 @@ const SET_ARTICLES_COUNT = `${ appName }/Articles/SET_ARTICLES_COUNT`;
 
 const initialState = {
     articlesCount: 0,
+    articlesPerPage: 5,
     articlesList: [],
     currentPage: 0
 };
