@@ -15,9 +15,8 @@ class ArticleSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            headline: "",
-            startDate: "",
-            endDate: "",
+            startDate: undefined,
+            endDate: undefined,
             sortBy: "creationDate",
             orderIncrease: false
         };
@@ -31,10 +30,6 @@ class ArticleSearch extends React.Component {
 
         });
     };
-
-    handleHeadline = (e) => {
-        this.setState({headline: e.target.value});
-    };
     handleStartDate = (e) => {
         this.setState({ startDate: e.target.value})
     };
@@ -45,7 +40,6 @@ class ArticleSearch extends React.Component {
 
     render() {
         return <form onSubmit={this.search}>
-            <input type="text" name="headline" value={this.state.headline} onChange={this.handleHeadline}/>
             <input
                 type="date"
                 value={this.state.startDate}
