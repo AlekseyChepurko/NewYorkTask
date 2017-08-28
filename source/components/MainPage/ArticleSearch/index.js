@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getArticles, loadArticlesCount } from 'DuckModules/Articles';
+import "./index.css";
 
 const maxDate = () => {
     let today = new Date();
@@ -40,11 +41,18 @@ class ArticleSearch extends React.Component {
         this.setState({endDate: e.target.value})
     };
 
+    toggleOrderIncrease = (e) => {
+        e.preventDefault();
+        this.setState({
+            orderIncrease: !this.state.orderIncrease
+        });
+    };
+
     render() {
         if(this.props.currentList === undefined){
             this.search();
         }
-        return <form onSubmit={this.submit}>
+        return <form className="search__form-wrap" onSubmit={this.submit}>
             <input
                 type="date"
                 value={this.state.startDate}
@@ -58,6 +66,7 @@ class ArticleSearch extends React.Component {
                 min="1851-09-18"
                 max={maxDate()}
                 name="endDate"/>
+            <a href="#" onClick={this.toggleOrderIncrease} >{this.state.orderIncrease ? "↑" : "↓"}</a>
             <input type="submit" value="Search"/>
         </form>
     }

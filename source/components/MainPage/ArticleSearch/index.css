@@ -1,0 +1,6 @@
+.search__form {
+  &-wrap {
+    display: flex;
+    flex-direction: row;
+  }
+}
