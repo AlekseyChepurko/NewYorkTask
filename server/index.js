@@ -44,7 +44,7 @@ app.post("/api/articles/add", async (req, res) => {
 });
 
 app.get("/api/articles/count", async (req, res) => {
-    const count = await db.getArticlesCount();
+    const count = await db.getArticlesCount(req.query);
     res.send(JSON.stringify(count));
     res.end();
 });

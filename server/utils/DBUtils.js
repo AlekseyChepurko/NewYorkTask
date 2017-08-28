@@ -5,9 +5,15 @@ export const setupConnection = () => {
     mongoose.connect('mongodb://localhost/Articles');
 };
 
-export const getArticlesCount = async () => {
-    const all = await ArticleModel.find();
-
+export const getArticlesCount = async (params) => {
+    const startDate = params.startDate ? new Date(params.startDate) : new Date("1851-09-18");
+    const endDate = params.endDate ? new Date(params.endDate) : Date.now();
+    const all = await ArticleModel.find(({
+        creationDate: {
+            $gt: startDate,
+            $lt: endDate
+        }
+    }));
     return all.length;
 };
 
