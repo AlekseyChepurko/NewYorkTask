@@ -12,8 +12,8 @@ export const getArticlesCount = async () => {
 };
 
 export const getArticleList = (params, page=0,articlesPerPage=5) => {
-    const startDay = params.startDay ? new Date(params.startDay) : new Date("1851-09-18");
-    const endDay = params.endDay ? new Date(params.endDay) : Date.now();
+    const startDate = params.startDate ? new Date(params.startDate) : new Date("1851-09-18");
+    const endDate = params.endDate ? new Date(params.endDate) : Date.now();
     const sortBy = params.sortBy || "creationDate";
     const headline = params.headline || "";
     const orderIncrease = params.orderIncrease || false;
@@ -21,8 +21,8 @@ export const getArticleList = (params, page=0,articlesPerPage=5) => {
     sortObj[sortBy] = orderIncrease ? 1 : -1;
     return ArticleModel.find({
         creationDate: {
-            $gt: startDay,
-            $lt: endDay
+            $gt: startDate,
+            $lt: endDate
         }
     }).sort(sortObj).skip(page*articlesPerPage).limit(articlesPerPage)
 };
