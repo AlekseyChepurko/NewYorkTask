@@ -21,6 +21,7 @@ env:
 
 globals:
   __REDUX_DEVTOOLS_EXTENSION__: true
+  APP_NAME: true
   SERVER: true
 
 rules:
