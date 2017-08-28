@@ -27,6 +27,7 @@
     "compression": "^1.6.2",
     "history": "^4.6.3",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.8",
     "node-sass-middleware": "^0.11.0",
     "normalize-scss": "^7.0.0",
