@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import bodyParser from 'body-parser';
 import compression from "compression";
 import * as db from "./utils/DBUtils";
 
@@ -8,11 +9,14 @@ const PORT = process.argv[2] || 3000;
 
 db.setupConnection();
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression({
     filter: (req) => !(req.query.compress === "false"),
 }));
 
 app.use(express.static(path.join(__dirname, "../build")));
+
 
 // Healthchec
 app.get("/health", (req, res) => {
@@ -35,7 +39,7 @@ app.get("/health", (req, res) => {
 
 
 app.post("/api/articles/add", async (req, res) => {
-    await db.addArticle({});
+    await db.addArticle(req.body);
     res.end();
 });
 
@@ -46,7 +50,7 @@ app.get("/api/articles/count", async (req, res) => {
 });
 
 app.get("/api/articles/list", async (req, res) => {
-    res.send(await db.getArticleList(req.query));
+    res.send(await db.getArticleList(req.query, req.query.index));
 });
 
 
