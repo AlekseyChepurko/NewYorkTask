@@ -1,7 +1,9 @@
 import React from 'react';
 import { string, arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { loadArticle } from 'DuckModules/Article';
+import './index.css';
 
 class Article extends React.Component {
   componentWillMount() {
@@ -10,18 +12,25 @@ class Article extends React.Component {
   }
   render() {
     if (!this.props.article) {
-      return <div>loading data...</div>;
+      return <div className='article__data-preload'><span>loading data...</span></div>;
     }
     const {
             headline,
             abstract,
         } = this.props.article;
-    const links = this.props.article.links.map(link =>
-      <a key={ link.link } href={ link.link }>{link.text}</a>);
-    return (<div>
-      <h1>{headline}</h1>
-      <p>{abstract}</p>
-      <div>{links}</div>
+    const links = this.props.article.links.map(link => (<span key={ link.link }>
+      <a href={ link.link } target='_blank'>{link.text}</a>;
+    </span>));
+
+    const creationDate = moment(this.props.creationDate).format('MMM do YYYY');
+
+    return (<div className='jumbotron'>
+      <h1 className='display-3 article__header'>{headline}</h1>
+      <p>by {creationDate}</p>
+      <p className='lead'>{abstract}</p>
+      <div>
+        Related links: {links}
+      </div>
     </div>);
   }
 }
