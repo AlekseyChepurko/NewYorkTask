@@ -31,10 +31,11 @@ export default function Articles(state = initialState, action) {
         ...state,
         articlesCount: action.payload.articlesCount,
       };
-    case CHANGE_PAGE: return {
-      ...state,
-      currentPage: action.payload.pageNumber - 1,
-    };
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        currentPage: Number(action.payload.pageNumber - 1),
+      };
     case RESET: {
       return initialState;
     }

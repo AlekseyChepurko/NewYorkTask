@@ -24,7 +24,6 @@ class ArticleSearch extends React.Component {
   }
   search = () => {
     this.props.loadArticlesCount({ ...this.state });
-    this.props.changePage(1);
     this.props.getArticles({
       index: this.props.currentPage,
       ...this.state,
@@ -33,6 +32,7 @@ class ArticleSearch extends React.Component {
   };
   submit = (e) => {
     e.preventDefault();
+    this.props.changePage({ pageNumber: 1 });
     this.search();
   };
   handleStartDate = (e) => {
@@ -41,7 +41,6 @@ class ArticleSearch extends React.Component {
   handleEndDate = (e) => {
     this.setState({ endDate: e.target.value });
   };
-
   toggleOrderIncrease = (e) => {
     e.preventDefault();
     this.setState({
@@ -54,24 +53,38 @@ class ArticleSearch extends React.Component {
       this.search();
     }
     return (<form className='search__form-wrap' onSubmit={ this.submit }>
-      <input
-        type='date'
-        value={ this.state.startDate }
-        onChange={ this.handleStartDate }
-        min='1851-09-18'
-        max={ maxDate() }
-        name='startDate'
-      />
-      <input
-        type='date'
-        value={ this.state.endDate }
-        onChange={ this.handleEndDate }
-        min='1851-09-18'
-        max={ maxDate() }
-        name='endDate'
-      />
-      <a href='#' onClick={ this.toggleOrderIncrease } >{this.state.orderIncrease ? '↑' : '↓'}</a>
-      <input type='submit' value='Search' />
+      <div className='input-group col-lg-3 search__date-input'>
+        <span className='input-group-addon' >Since</span>
+        <input
+          type='date'
+          value={ this.state.startDate }
+          onChange={ this.handleStartDate }
+          min='1851-09-18'
+          max={ maxDate() }
+          name='startDate'
+          className='form-control'
+        />
+      </div>
+      <div className='input-group col-lg-3'>
+        <label className='input-group-addon'>to</label>
+        <input
+          type='date'
+          value={ this.state.endDate }
+          onChange={ this.handleEndDate }
+          min='1851-09-18'
+          max={ maxDate() }
+          name='endDate'
+          id='endDate'
+          className='form-control'
+
+        />
+      </div>
+      <div>
+        <a href='#' onClick={ this.toggleOrderIncrease } className='btn btn-link' >
+          Order {this.state.orderIncrease ? '↑' : '↓'}
+        </a>
+        <input type='submit' className='btn btn-primary' value='Search' />
+      </div>
     </form>);
   }
 }

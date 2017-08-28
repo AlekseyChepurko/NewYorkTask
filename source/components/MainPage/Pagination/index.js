@@ -1,5 +1,5 @@
 import React from 'react';
-import {string, shape, func} from 'prop-types';
+import { string, number, shape, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changePage } from 'DuckModules/Articles';
@@ -17,7 +17,7 @@ class Pagination extends React.Component {
     for (let i = 0; i < pageCount; i++) {
       pages.push(
         <li key={ i }>
-          <PageItem pageNumber={ i + 1 } changePage={ this.props.changePage } />
+          <PageItem pageNumber={ i + 1 } active={ currentPage === i } changePage={ this.props.changePage } />
         </li>);
     }
     return (<ul className='pagination__wrap'>
@@ -27,28 +27,41 @@ class Pagination extends React.Component {
 }
 
 Pagination.propTypes = {
+  articlesCount: number,
+  currentPage: number,
+  articlesPerPage: number,
+  changePage: func,
 };
+
+Pagination.defaultProps = {
+  articlesCount: 0,
+  currentPage: 1,
+  articlesPerPage: 5,
+  changePage: () => {},
+};
+
 
 const PageItem = (props) => {
   const {
         pageNumber,
         changePage,
+        active,
     } = props;
   const clickHandle = (e) => {
     e.preventDefault();
     changePage({ pageNumber });
   };
-  return <Link className='pagination__item' to='#' onClick={ clickHandle }>{pageNumber}</Link>;
+  return <Link className={ ` btn ${ active ? 'btn-primary' : 'btn-link' }` } to='#' onClick={ clickHandle }>{pageNumber}</Link>;
 };
 
 PageItem.propTypes = {
-    pageNumber: string,
-    changePage: func
+  pageNumber: string,
+  changePage: func,
 };
 
 PageItem.defaultProps = {
-    pageNumber: "",
-    changePage: () => {}
+  pageNumber: 1,
+  changePage: () => {},
 };
 
 const mapStateToProps = (state, ownProps) => ({

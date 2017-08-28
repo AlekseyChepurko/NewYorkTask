@@ -2,6 +2,7 @@ import React from 'react';
 import { string, arrayOf, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import './Result.css';
 
 class Results extends React.Component {
@@ -25,18 +26,15 @@ const Result = (props) => {
         headline,
         lead,
         _id,
-        creationDate,
     } = props;
-  const links = props.links.map((link) => {
-    return <li key={ link }>{link}</li>;
-  });
+  const creationDate = moment(props.creationDate).format('Do MMMM YYYY');
+
   return (<li className='articles__result-wrap'>
     <div className='articles__result-header'>
-      <h2 className='headline'><Link to={ `/article/${ _id }/` }>{headline}</Link></h2>
+      <h2 className='headline'><Link className='btn btn-link' to={ `/article/${ _id }/` }>{headline}</Link></h2>
       <div className='articles__result-creationDate'>{creationDate}</div>
     </div>
     <div className='articles__result-lead'>{lead}</div>
-    <ul className='articles__result-links'>{links}</ul>
   </li>);
 };
 
