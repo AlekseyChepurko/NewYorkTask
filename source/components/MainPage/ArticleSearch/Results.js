@@ -32,7 +32,7 @@ const Result = (props) => {
     });
     return <li className="articles__result-wrap">
         <div className="articles__result-header">
-            <h2 className="headline"><Link to={`/article/${_id}`}>{headline}</Link></h2>
+            <h2 className="headline"><Link to={`/article/${_id}/`}>{headline}</Link></h2>
             <div className="articles__result-creationDate">{creationDate}</div>
         </div>
         <div className="articles__result-lead">{lead}</div>
