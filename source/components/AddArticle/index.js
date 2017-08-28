@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { func, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addArticle } from 'DuckModules/AddArticle';
 import Links from './Links';
@@ -56,7 +57,7 @@ class AddArticle extends React.Component {
       <h1><Link to='/' className='badge badge-secondary'>Archive</Link></h1>
       <form className='article__create-form' onSubmit={ this.handleSubmit }>
         <div className='form-group'>
-          <label htmlFor='idHeadline'>Headline</label>
+          <Label htmlId='idHeadline'>Headline</Label>
           <input
             className='form-control'
             id='idHeadline'
@@ -67,7 +68,7 @@ class AddArticle extends React.Component {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='idLead'>Lead</label>
+          <Label htmlId='idLead'>Lead</Label>
           <textarea
             className='form-control'
             id='idLead'
@@ -79,7 +80,7 @@ class AddArticle extends React.Component {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='idAbstract'>Abstract</label>
+          <Label htmlId='idAbstract'>Abstract</Label>
           <textarea
             className='form-control'
             id='idAbstract'
@@ -91,7 +92,7 @@ class AddArticle extends React.Component {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='idCreationDate'>Creation date</label>
+          <Label htmlId='idCreationDate'>Creation date</Label>
           <input
             className='form-control'
             id='idCreationDate'
@@ -112,11 +113,41 @@ class AddArticle extends React.Component {
           id='submit'
           { ...disabledProp }
         />
-        <label htmlFor='submit'>{statusText}</label>
+        <Label htmlId='submit'>{statusText}</Label>
       </form>
     </div>);
   }
 }
+
+AddArticle.propTypes = {
+  addArticle: func,
+  status: string,
+  statusText: string,
+};
+
+AddArticle.defaultProps = {
+  addArticle: () => {},
+  status: '',
+  statusText: '',
+};
+
+const Label = (props) => {
+  const {
+    htmlId,
+    children,
+  } = props;
+  return <label htmlFor={ htmlId }>{children}</label>;
+};
+
+Label.propTypes = {
+  htmlId: string,
+  children: string,
+};
+
+Label.defaultProps = {
+  htmlId: '',
+  children: '',
+};
 
 const mapStateToProps = (state) => ({
   status: state.AddArticle.status,

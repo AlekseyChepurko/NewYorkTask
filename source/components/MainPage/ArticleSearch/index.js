@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { func, number, arrayOf, object } from 'prop-types';
 import { getArticles, loadArticlesCount, changePage } from 'DuckModules/Articles';
 import './index.css';
 
@@ -88,8 +89,28 @@ class ArticleSearch extends React.Component {
     </form>);
   }
 }
+
+ArticleSearch.propTypes = {
+  loadArticlesCount: func,
+  getArticles: func,
+  currentPage: number,
+  changePage: func,
+  currentList: arrayOf(object),
+};
+
+ArticleSearch.defaultProps = {
+  loadArticlesCount: () => {},
+  getArticles: () => {},
+  currentPage: 1,
+  changePage: () => {},
+  currentList: [{}],
+};
+
 const mapStateToProps = (state) => ({
   currentPage: state.Articles.currentPage,
   currentList: state.Articles.articlesList[state.Articles.currentPage],
 });
-export default connect(mapStateToProps, { getArticles, loadArticlesCount, changePage })(ArticleSearch);
+export default connect(mapStateToProps, {
+  getArticles,
+  loadArticlesCount,
+  changePage })(ArticleSearch);

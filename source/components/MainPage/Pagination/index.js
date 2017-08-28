@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, shape, func } from 'prop-types';
+import { string, number, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changePage } from 'DuckModules/Articles';
@@ -17,7 +17,11 @@ class Pagination extends React.Component {
     for (let i = 0; i < pageCount; i++) {
       pages.push(
         <li key={ i }>
-          <PageItem pageNumber={ i + 1 } active={ currentPage === i } changePage={ this.props.changePage } />
+          <PageItem
+            pageNumber={ i + 1 }
+            active={ currentPage === i }
+            changePage={ this.props.changePage }
+          />
         </li>);
     }
     return (<ul className='pagination__wrap'>
@@ -44,22 +48,27 @@ Pagination.defaultProps = {
 const PageItem = (props) => {
   const {
         pageNumber,
-        changePage,
         active,
     } = props;
   const clickHandle = (e) => {
     e.preventDefault();
-    changePage({ pageNumber });
+    props.changePage({ pageNumber });
   };
-  return <Link className={ ` btn ${ active ? 'btn-primary' : 'btn-link' }` } to='#' onClick={ clickHandle }>{pageNumber}</Link>;
+  return (<Link
+    className={ ` btn ${ active ? 'btn-primary' : 'btn-link' }` }
+    to='#'
+    onClick={ clickHandle }
+  >{pageNumber}</Link>);
 };
 
 PageItem.propTypes = {
   pageNumber: string,
   changePage: func,
+  active: bool,
 };
 
 PageItem.defaultProps = {
+  active: false,
   pageNumber: 1,
   changePage: () => {},
 };

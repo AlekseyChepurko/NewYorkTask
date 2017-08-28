@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, arrayOf, shape } from 'prop-types';
+import { string, array, number } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -21,17 +21,27 @@ class Results extends React.Component {
   }
 }
 
+Results.propTypes = {
+  articlesList: array,
+  currentPage: number,
+};
+
+Results.defaultProps = {
+  articlesList: [],
+  currentPage: 1,
+};
+
 const Result = (props) => {
   const {
         headline,
         lead,
-        _id,
+        _id: id,
     } = props;
   const creationDate = moment(props.creationDate).format('Do MMMM YYYY');
 
   return (<li className='articles__result-wrap'>
     <div className='articles__result-header'>
-      <h2 className='headline'><Link className='btn btn-link' to={ `/article/${ _id }/` }>{headline}</Link></h2>
+      <h2 className='headline'><Link className='btn btn-link' to={ `/article/${ id }/` }>{headline}</Link></h2>
       <div className='articles__result-creationDate'>{creationDate}</div>
     </div>
     <div className='articles__result-lead'>{lead}</div>
@@ -42,26 +52,14 @@ Result.defaultProps = {
   headline: 'head',
   lead: 'lead',
   creationDate: Date.now(),
-  links: [
-    {
-      text: 'adyn',
-      link: '#',
-    },
-    {
-      text: 'dva',
-      link: '#',
-    },
-  ],
+  _id: '',
 };
 
 Result.propTypes = {
   headline: string,
   lead: string,
   creationDate: string,
-  links: arrayOf(shape({
-    text: string,
-    link: string,
-  })),
+  _id: string,
 };
 
 

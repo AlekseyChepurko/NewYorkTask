@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, arrayOf, shape } from 'prop-types';
+import { string, arrayOf, shape, func } from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { loadArticle } from 'DuckModules/Article';
@@ -44,6 +44,13 @@ Article.propTypes = {
     })),
     abstract: string,
   }),
+  match: shape({
+    params: shape({
+      id: string,
+    }),
+  }),
+  loadArticle: func,
+  creationDate: string,
 };
 
 Article.defaultProps = {
@@ -57,6 +64,13 @@ Article.defaultProps = {
     ],
     abstract: '',
   },
+  match: {
+    params: {
+      id: '',
+    },
+  },
+  loadArticle: () => {},
+  creationDate: '',
 
 };
 

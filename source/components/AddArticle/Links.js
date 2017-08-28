@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { func, arrayOf, string, shape } from 'prop-types';
 
 class Links extends React.Component {
   constructor(props) {
@@ -49,5 +49,21 @@ class Links extends React.Component {
     </div>);
   }
 }
+
+Links.propTypes = {
+  addLink: func,
+  links: arrayOf(shape({
+    text: string,
+    link: string,
+  })),
+};
+
+Links.defaultProps = {
+  addLink: () => {},
+  links: [{
+    text: '',
+    link: '',
+  }],
+};
 
 export default Links;

@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import initStore, { history } from './ducks/store';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import './app.css';
+import initStore, { history } from './ducks/store';
 import SagasManager from './ducks/helpers/sagasManager';
 import { MainPage } from './components/MainPage';
 import Article from './components/Article';
 import AddArticle from './components/AddArticle';
 import NotFound from './components/NotFound';
+import './app.css';
+
 
 const store = initStore({});
 store.runSaga(SagasManager.getRootSaga());
