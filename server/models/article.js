@@ -9,7 +9,7 @@ const ArticleSchema = new Schema({
     lead: {
         type: String,
         required: true },
-    links: [{name: String, link: String}],
+    links: [{text: String, link: String}],
     tags: [String],
     abstract: String,
     creationDate: {
