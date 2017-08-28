@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addArticle } from 'DuckModules/AddArticle';
+import Links from './Links';
+import './index.css';
 
 class AddArticle extends React.Component {
   constructor(props) {
@@ -8,7 +11,9 @@ class AddArticle extends React.Component {
     this.state = {
       headline: '',
       abstract: '',
+      lead: '',
       creationDate: '',
+      links: [],
     };
   }
 
@@ -22,24 +27,100 @@ class AddArticle extends React.Component {
       abstract: e.target.value,
     });
   };
+  handleLead = (e) => {
+    this.setState({
+      lead: e.target.value,
+    });
+  };
   handleCreationDate = (e) => {
     this.setState({
       creationDate: e.target.value,
     });
   };
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.addArticle(this.state);
   };
+  addLink = (link) => {
+    this.setState({
+      links: [...this.state.links, link],
+    });
+  };
   render() {
-    return (<form onSubmit={ this.handleSubmit }>
-      <input type='text' name='headline' value={ this.state.headline } onChange={ this.handleHeadline } />
-      <input type='text' name='abstract' value={ this.state.abstract } onChange={ this.handleAbstract } />
-      <input type='date' name='creationDate' value={ this.state.creationDate } onChange={ this.handleCreationDate } />
-      <input type='submit' value='add' />
-    </form>);
+    const {
+      status,
+        statusText,
+    } = this.props;
+    const disabledProp = status !== '' ? { disabled: true } : {};
+    return (<div>
+      <h1><Link to='/' className='badge badge-secondary'>Archive</Link></h1>
+      <form className='article__create-form' onSubmit={ this.handleSubmit }>
+        <div className='form-group'>
+          <label htmlFor='idHeadline'>Headline</label>
+          <input
+            className='form-control'
+            id='idHeadline'
+            type='text'
+            name='headline'
+            value={ this.state.headline }
+            onChange={ this.handleHeadline }
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='idLead'>Lead</label>
+          <textarea
+            className='form-control'
+            id='idLead'
+            rows='2'
+            type='text'
+            name='abstract'
+            value={ this.state.lead }
+            onChange={ this.handleLead }
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='idAbstract'>Abstract</label>
+          <textarea
+            className='form-control'
+            id='idAbstract'
+            rows='4'
+            type='text'
+            name='abstract'
+            value={ this.state.abstract }
+            onChange={ this.handleAbstract }
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='idCreationDate'>Creation date</label>
+          <input
+            className='form-control'
+            id='idCreationDate'
+            type='date'
+            name='creationDate'
+            value={ this.state.creationDate }
+            onChange={ this.handleCreationDate }
+          />
+        </div>
+        <Links
+          links={ this.state.links }
+          addLink={ this.addLink }
+        />
+        <input
+          type='submit'
+          className='btn btn-primary'
+          value='Add'
+          id='submit'
+          { ...disabledProp }
+        />
+        <label htmlFor='submit'>{statusText}</label>
+      </form>
+    </div>);
   }
 }
 
-export default connect(undefined, { addArticle })(AddArticle);
+const mapStateToProps = (state) => ({
+  status: state.AddArticle.status,
+  statusText: state.AddArticle.statusText,
+});
+
+export default connect(mapStateToProps, { addArticle })(AddArticle);
