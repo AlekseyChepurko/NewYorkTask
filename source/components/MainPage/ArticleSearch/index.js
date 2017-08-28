@@ -103,7 +103,6 @@ ArticleSearch.defaultProps = {
   getArticles: () => {},
   currentPage: 1,
   changePage: () => {},
-  currentList: [{}],
 };
 
 const mapStateToProps = (state) => ({
