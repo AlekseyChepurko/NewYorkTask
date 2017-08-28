@@ -14,7 +14,7 @@ const ArticleSchema = new Schema({
     abstract: String,
     creationDate: {
         type: Date,
-        min: Date('1851-09-18'),
+        min: new Date('1851-09-18'),
         max: Date.now,
         required: true,
     }
