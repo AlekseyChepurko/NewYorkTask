@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rimraf ./build && webpack",
+    "dev": "rimraf ./build && webpack --watch",
+    "start-server": "babel-node server/index.js 3000 --watch --presets es2015,stage-2",
     "dev-server": "webpack-dev-server",
-
     "lint": "eslint ./source",
     "lint-fix": "eslint ./source --fix"
-
   },
   "repository": {
     "type": "git",
@@ -24,9 +23,11 @@
   "homepage": "https://github.com/AlekseyChepurko/NewYorkTask#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "history": "^4.6.3",
     "lodash": "^4.17.4",
+    "mongoose": "^4.11.8",
     "node-sass-middleware": "^0.11.0",
     "normalize-scss": "^7.0.0",
     "postcss-font-magician": "^2.0.0",
@@ -47,10 +48,10 @@
     "redux-saga": "^0.15.3",
     "reselect": "^3.0.1",
     "whatwg-fetch": "^2.0.3"
-
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.7.2",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^7.0.0",
@@ -59,10 +60,11 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.6.0",
     "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "^6.6.1",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.1",
