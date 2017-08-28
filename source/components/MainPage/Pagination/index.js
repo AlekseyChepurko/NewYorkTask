@@ -62,7 +62,7 @@ const PageItem = (props) => {
 };
 
 PageItem.propTypes = {
-  pageNumber: string,
+  pageNumber: number,
   changePage: func,
   active: bool,
 };
