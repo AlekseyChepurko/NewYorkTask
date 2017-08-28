@@ -8,6 +8,7 @@ import "./app.css";
 import SagasManager from './ducks/helpers/sagasManager';
 import { MainPage } from "./components/MainPage";
 import Article from "./components/Article";
+import AddArticle from "./components/AddArticle";
 import NotFound from './components/NotFound';
 
 const store = initStore({});
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={ MainPage }/>
                 <Route path="/article/:id" component={ Article }/>
+                <Route path="/add" component={ AddArticle }/>
                 <Route path="*" component={ NotFound }/>
             </Switch>
         </ConnectedRouter>
