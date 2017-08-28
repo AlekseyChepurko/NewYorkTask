@@ -1,0 +1,9 @@
+.pagination {
+  &__wrap {
+    display: flex;
+    flex-direction: row;
+  }
+  &__item {
+    margin-right: 10px;
+  }
+}
