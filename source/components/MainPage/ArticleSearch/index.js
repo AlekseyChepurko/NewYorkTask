@@ -18,17 +18,20 @@ class ArticleSearch extends React.Component {
             startDate: undefined,
             endDate: undefined,
             sortBy: "creationDate",
-            orderIncrease: false
+            orderIncrease: true
         };
     }
-    search = (e) => {
-        e.preventDefault();
+    search = () => {
         this.props.loadArticlesCount();
         this.props.getArticles({
-            index: 0,
+            index: this.props.currentPage,
             ...this.state
 
         });
+    };
+    submit = (e) => {
+        e.preventDefault();
+        this.search();
     };
     handleStartDate = (e) => {
         this.setState({ startDate: e.target.value})
@@ -37,9 +40,11 @@ class ArticleSearch extends React.Component {
         this.setState({endDate: e.target.value})
     };
 
-
     render() {
-        return <form onSubmit={this.search}>
+        if(this.props.currentList === undefined){
+            this.search();
+        }
+        return <form onSubmit={this.submit}>
             <input
                 type="date"
                 value={this.state.startDate}
@@ -57,5 +62,8 @@ class ArticleSearch extends React.Component {
         </form>
     }
 }
-
-export default connect(undefined, {getArticles, loadArticlesCount})(ArticleSearch);
+const mapStateToProps = ( state ) => ({
+    currentPage: state.Articles.currentPage,
+    currentList: state.Articles.articlesList[state.Articles.currentPage]
+});
+export default connect(mapStateToProps, {getArticles, loadArticlesCount})(ArticleSearch);
