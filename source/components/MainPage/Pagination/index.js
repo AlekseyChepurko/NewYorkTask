@@ -1,4 +1,5 @@
 import React from 'react';
+import {string, shape, func} from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changePage } from 'DuckModules/Articles';
@@ -25,6 +26,9 @@ class Pagination extends React.Component {
   }
 }
 
+Pagination.propTypes = {
+};
+
 const PageItem = (props) => {
   const {
         pageNumber,
@@ -34,7 +38,17 @@ const PageItem = (props) => {
     e.preventDefault();
     changePage({ pageNumber });
   };
-  return <a className='pagination__item' href='#' onClick={ clickHandle }>{pageNumber}</a>;
+  return <Link className='pagination__item' to='#' onClick={ clickHandle }>{pageNumber}</Link>;
+};
+
+PageItem.propTypes = {
+    pageNumber: string,
+    changePage: func
+};
+
+PageItem.defaultProps = {
+    pageNumber: "",
+    changePage: () => {}
 };
 
 const mapStateToProps = (state, ownProps) => ({
