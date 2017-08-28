@@ -2,5 +2,12 @@
   &-wrap {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
+    max-width: 70%;
+    margin: 50px auto 50px auto;
+
+    .search__date-input {
+      padding: 0;
+    }
   }
 }
