@@ -18,7 +18,7 @@ export const getArticleList = (params, page=0,articlesPerPage=5) => {
     const headline = params.headline || "";
     const orderIncrease = params.orderIncrease || false;
     const sortObj= {};
-    sortObj[sortBy] = orderIncrease ? 1 : -1;
+    sortObj[sortBy] = orderIncrease==='true' ? 1 : -1;
     return ArticleModel.find({
         creationDate: {
             $gt: startDate,
