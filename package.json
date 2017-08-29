@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rimraf ./build && webpack --watch",
+    "build": "rimraf ./build && webpack",
+    "prod": "rimraf ./build && webpack -p",
     "start-server": "babel-node server/index.js 3000 --watch --presets es2015,stage-2",
     "dev-server": "webpack-dev-server",
     "lint": "eslint ./source",
