@@ -9,7 +9,8 @@
     "build": "rimraf ./build && webpack",
     "prod": "rimraf ./build && webpack -p",
     "start-server": "babel-node server/index.js 3000 --watch --presets es2015,stage-2",
-    "start": "babel-node server/index.js 3000 --presets es2015,stage-2",
+    "ibuild": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+    "start": "rm -rf ./build && NODE_ENV=\"production\" webpack && babel-node server/index.js 3000 --presets es2015,stage-2",
     "dev-server": "webpack-dev-server",
     "lint": "eslint ./source",
     "lint-fix": "eslint ./source --fix"
