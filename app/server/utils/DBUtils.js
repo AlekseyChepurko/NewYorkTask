@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { ArticleModel } from '../models/article';
 
 export const setupConnection = () => {
-    mongoose.connect('mongodb://localhost/Articles');
+    mongoose.connect('mongodb://mongodb/Articles');
 };
 
 export const getArticlesCount = async (params) => {
